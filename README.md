@@ -1,0 +1,1 @@
+go run ariga.io/entimport/cmd/entimport  -dsn "postgres://postgres:mysecretpassword@127.0.0.1:5432/thee.me?sslmode=disable"
