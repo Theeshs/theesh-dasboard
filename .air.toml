@@ -1,0 +1,11 @@
+# .air.toml
+
+# Config file for `air`
+[build]
+bin = "./tmp/main" # Path to build binary file
+cmd = "go build -o ./tmp/main" # Command to build the binary file
+dir = "." # Root directory for the watcher
+exclude_dir = ["tmp", "vendor"] # Exclude directories from the watcher
+
+[run]
+cmd = "./tmp/main" # Command to run the binary file

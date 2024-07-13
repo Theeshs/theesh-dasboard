@@ -1,33 +1,57 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
 	"theedashboard/ent"
 
+	"theedashboard/user"
+
 	"entgo.io/ent/dialect"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/lib/pq"
 )
 
+// @title Fiber Swagger Example API
+// @version 1.0
+// @description This is Thee Dashboard APIs.
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:4000
+// @BasePath /
 func main() {
+
+	app := fiber.New()
+
+	app.Use(logger.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*", // Use a specific domain in production
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+	}))
 	client, err := ent.Open(dialect.Postgres, "postgres://postgres:mysecretpassword@127.0.0.1:5432/thee.me?sslmode=disable")
 	if err != nil {
-		log.Fatalf("failed opening connection to postgres: %v", err)
+		log.Fatalf("failed opening connection to sqlite: %v", err)
 	}
 	defer client.Close()
-	ctx := context.Background()
 
-	example(ctx, client)
+	// Run the auto migration tool to create all schema resources
+	// if err := client.Schema.Create(context.Background()); err != nil {
+	//     log.Fatalf("failed creating schema resources: %v", err)
+	// }
+
+	registerRoutes(app, client)
+	log.Fatal(app.Listen(":4000"))
+
 }
 
-func example(ctx context.Context, client *ent.Client) {
-	// list all users
-	users, err := client.User.Query().All(ctx)
-	fmt.Println("Users:", users)
-
-	if err != nil {
-		log.Fatalf("Unable to fetch: %v", err)
-	}
-
+func registerRoutes(app *fiber.App, client *ent.Client) {
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+	user.RegisterUserRoutes(app, client)
 }
