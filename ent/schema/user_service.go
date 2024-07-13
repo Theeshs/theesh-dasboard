@@ -14,7 +14,7 @@ type UserService struct {
 }
 
 func (UserService) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("service_name").Optional(), field.String("service_description").Optional(), field.String("service_icon").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Int32("user_id").Optional()}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("service_name").Optional(), field.String("service_description").Optional(), field.String("service_icon").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Uint("user_id").Optional()}
 }
 func (UserService) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("user_services").Unique().Field("user_id")}

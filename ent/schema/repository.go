@@ -14,7 +14,7 @@ type Repository struct {
 }
 
 func (Repository) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("repo_name"), field.String("repo_description").Optional(), field.String("repo_url"), field.String("repo_language").Optional(), field.Time("repo_created_at"), field.Time("repo_updated_at"), field.Int32("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Bool("show_on_profile"), field.Int32("order")}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("repo_name"), field.String("repo_description").Optional(), field.String("repo_url"), field.String("repo_language").Optional(), field.Time("repo_created_at"), field.Time("repo_updated_at"), field.Uint("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Bool("show_on_profile"), field.Int32("order")}
 }
 func (Repository) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("repositories").Unique().Field("user_id")}

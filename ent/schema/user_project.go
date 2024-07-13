@@ -14,7 +14,7 @@ type UserProject struct {
 }
 
 func (UserProject) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("project_name"), field.Int32("user_id").Optional(), field.String("description").Optional(), field.Time("from_date").Optional(), field.Time("to_date").Optional(), field.String("project_link").Optional(), field.String("technologies").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional()}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("project_name"), field.Uint("user_id").Optional(), field.String("description").Optional(), field.Time("from_date").Optional(), field.Time("to_date").Optional(), field.String("project_link").Optional(), field.String("technologies").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional()}
 }
 func (UserProject) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("user_projects").Unique().Field("user_id")}

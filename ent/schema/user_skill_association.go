@@ -15,7 +15,7 @@ type UserSkillAssociation struct {
 }
 
 func (UserSkillAssociation) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Int32("percentage").Optional(), field.Int32("user_id").Optional(), field.Int32("skill_id").Optional().Unique()}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.Int32("percentage").Optional(), field.Uint("user_id").Optional(), field.Uint("skill_id").Optional().Unique()}
 }
 func (UserSkillAssociation) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("skill", Skill.Type).Ref("user_skill_association").Unique().Field("skill_id"), edge.From("user", User.Type).Ref("user_skill_associations").Unique().Field("user_id")}

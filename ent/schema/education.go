@@ -15,7 +15,7 @@ type Education struct {
 }
 
 func (Education) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("institue_name"), field.Time("start_date"), field.Time("end_date").Optional(), field.Int32("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.String("mode_of_study"), field.String("degree_type"), field.String("area_of_study"), field.Bool("currenty_studying").Optional(), field.String("description").Optional()}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("institue_name"), field.Time("start_date"), field.Time("end_date").Optional(), field.Uint("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.String("mode_of_study"), field.String("degree_type"), field.String("area_of_study"), field.Bool("currenty_studying").Optional(), field.String("description").Optional()}
 }
 func (Education) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("educations").Unique().Field("user_id")}

@@ -15,7 +15,7 @@ type Experience struct {
 }
 
 func (Experience) Fields() []ent.Field {
-	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("company_name"), field.Time("start_date"), field.Time("end_date").Optional(), field.Bool("current_place").Optional(), field.String("position"), field.Int32("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.String("description").Optional()}
+	return []ent.Field{field.Uint("id").SchemaType(map[string]string{"postgres": "serial"}), field.String("company_name"), field.Time("start_date"), field.Time("end_date").Optional(), field.Bool("current_place").Optional(), field.String("position"), field.Uint("user_id").Optional(), field.Time("created_at").Optional(), field.Time("updated_at").Optional(), field.String("description").Optional()}
 }
 func (Experience) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("experiences").Unique().Field("user_id")}

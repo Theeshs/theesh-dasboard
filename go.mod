@@ -1,4 +1,4 @@
-module myproject
+module theedashboard
 
 go 1.22.5
 
