@@ -11,6 +11,11 @@ import (
 
 var jwtSecret = []byte("2131ouidjskbnfiu134kb..12m")
 
+type MyCustomClaims struct {
+	UserID string `json:"user_id"`
+	jwt.StandardClaims
+}
+
 func JWTProtected() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		authHeader := c.Get("Authorization")
@@ -43,8 +48,23 @@ func JWTProtected() fiber.Handler {
 			})
 		}
 
-		// Set user ID in context
-		c.Locals("user_id", claims["user_id"])
+		userID, ok := claims["id"].(string) // JWT stores numbers as float64
+		if !ok {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Invalid user ID in JWT claims",
+			})
+		}
+
+		email, ok := claims["email"].(string)
+		if !ok {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Invalid email in JWT claims",
+			})
+		}
+
+		// Set user ID and email in context
+		c.Locals("user_id", userID)
+		c.Locals("email", email)
 
 		return c.Next()
 	}
