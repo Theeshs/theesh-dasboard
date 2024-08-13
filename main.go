@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"theedashboard/ent"
+	"theedashboard/services/experiences"
 
 	"theedashboard/services/dashboard"
 	"theedashboard/services/user"
@@ -53,4 +54,5 @@ func main() {
 func registerRoutes(app *fiber.App, client *ent.Client) {
 	dashboard.RegisterDashboardRoutes(app, client)
 	user.RegisterUserRoutes(app, client)
+	experiences.RegisterExperienceRoutes(app, client)
 }

@@ -2,13 +2,11 @@ package dashboard
 
 import (
 	"fmt"
+	"github.com/gofiber/fiber/v2"
 	"log"
 	"strconv"
 	"theedashboard/ent"
-
 	"theedashboard/services/user"
-
-	"github.com/gofiber/fiber/v2"
 )
 
 func Home(c *fiber.Ctx, client *ent.Client) error {
@@ -18,13 +16,13 @@ func Home(c *fiber.Ctx, client *ent.Client) error {
 	if err != nil {
 		log.Fatalf("Error converting string to uint64: %v", err)
 	}
-	user, err := user.FetchUserByID(client, uint(uint64Value))
+	requestUser, err := user.FetchUserByID(client, uint(uint64Value))
 	if err != nil {
 		log.Fatalf("Error fetching user: %v", err)
 	}
 	return c.JSON(fiber.Map{
-		"firstName": user.FirstName,
-		"username":  user.Username,
-		"message":   fmt.Sprintf("Welcome to %s Dashboard", user.FirstName),
+		"firstName": requestUser.FirstName,
+		"username":  requestUser.Username,
+		"message":   fmt.Sprintf("Welcome to %s Dashboard", requestUser.FirstName),
 	})
 }
