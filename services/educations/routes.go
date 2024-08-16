@@ -16,7 +16,7 @@ func RegisterEducationRoutes(app *fiber.App, client *ent.Client) {
 	app.Post("/educations/", middleware.JWTProtected(), func(c *fiber.Ctx) error {
 		return CreateUserEducation(c, client)
 	})
-	app.Post("/educations/:id", middleware.JWTProtected(), func(c *fiber.Ctx) error {
+	app.Put("/educations/:id", middleware.JWTProtected(), func(c *fiber.Ctx) error {
 		return UpdateUserEducation(c, client)
 	})
 }
