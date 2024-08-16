@@ -3,8 +3,11 @@ package main
 import (
 	"log"
 	"theedashboard/ent"
+	"theedashboard/services/educations"
+	"theedashboard/services/experiences"
 
-	"theedashboard/user"
+	"theedashboard/services/dashboard"
+	"theedashboard/services/user"
 
 	"entgo.io/ent/dialect"
 	"github.com/gofiber/fiber/v2"
@@ -50,8 +53,8 @@ func main() {
 }
 
 func registerRoutes(app *fiber.App, client *ent.Client) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	dashboard.RegisterDashboardRoutes(app, client)
 	user.RegisterUserRoutes(app, client)
+	experiences.RegisterExperienceRoutes(app, client)
+	educations.RegisterEducationRoutes(app, client)
 }
