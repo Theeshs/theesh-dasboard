@@ -6,6 +6,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"reflect"
+	"sync"
 	"theedashboard/ent/alembicversion"
 	"theedashboard/ent/education"
 	"theedashboard/ent/email"
@@ -16,8 +18,6 @@ import (
 	"theedashboard/ent/userproject"
 	"theedashboard/ent/userservice"
 	"theedashboard/ent/userskillassociation"
-	"reflect"
-	"sync"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"

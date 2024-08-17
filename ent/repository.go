@@ -4,9 +4,9 @@ package ent
 
 import (
 	"fmt"
+	"strings"
 	"theedashboard/ent/repository"
 	"theedashboard/ent/user"
-	"strings"
 	"time"
 
 	"entgo.io/ent"

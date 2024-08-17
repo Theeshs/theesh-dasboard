@@ -4,9 +4,9 @@ package ent
 
 import (
 	"fmt"
+	"strings"
 	"theedashboard/ent/skill"
 	"theedashboard/ent/userskillassociation"
-	"strings"
 	"time"
 
 	"entgo.io/ent"
