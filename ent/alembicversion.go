@@ -4,8 +4,8 @@ package ent
 
 import (
 	"fmt"
-	"theedashboard/ent/alembicversion"
 	"strings"
+	"theedashboard/ent/alembicversion"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"

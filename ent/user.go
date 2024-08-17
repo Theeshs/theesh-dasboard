@@ -4,8 +4,8 @@ package ent
 
 import (
 	"fmt"
-	"theedashboard/ent/user"
 	"strings"
+	"theedashboard/ent/user"
 	"time"
 
 	"entgo.io/ent"

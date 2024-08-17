@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sync"
 	"theedashboard/ent/education"
 	"theedashboard/ent/email"
 	"theedashboard/ent/experience"
@@ -16,7 +17,6 @@ import (
 	"theedashboard/ent/userproject"
 	"theedashboard/ent/userservice"
 	"theedashboard/ent/userskillassociation"
-	"sync"
 	"time"
 
 	"entgo.io/ent"
